@@ -15,6 +15,17 @@ forums](https://discuss.streamlit.io).
 In the meantime, below is an example of what you can do with just a few lines of code:
 """
 
+df = pd.read_csv('https://raw.githubusercontent.com/jesusjfy/QAIRA/main/13_Monitoreo_Junio_2021.csv',sep=";")
+
+df.columns = ['Id','Codigo_entidad','Codigo_ubigeo','Codigo_pais','Nombre_uo','Fecha','CO','H2S','NO2','O3','PM10', 'PM25', 'SO2',
+       'Ruido', 'UV', 'Humedad', 'Latitud', 'Longitud','Presion', 'Temperatura']
+
+df['Fecha_datetime'] = pd.to_datetime(df['Fecha'])
+df['Dia'] = df['Fecha_datetime'].dt.day
+df['Mes'] = df['Fecha_datetime'].dt.month
+df['Anio'] = df['Fecha_datetime'].dt.year
+df['Tiempo'] = df['Fecha_datetime'].dt.time
+
 
 with st.echo(code_location='below'):
     total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
